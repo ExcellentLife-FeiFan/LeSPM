@@ -2,14 +2,14 @@
 <template>
   <div class="shop-item" @click="toShopDetail">
     <div class="left">
-      <img v-lazy="'http://p0.meituan.net/xianfu/4c9e0d4356522fa1e50effd10d4f663f49152.jpg'">
+      <img v-lazy="'http://p0.meituan.net/xianfu/168034337b679ad0a12c0e136328f102165888.jpg'">
     </div>
 
     <div class="right">
       <div class="name">{{ data.Name }}</div>
 
       <div class="mid clearfix">
-        <!--<star class="fl" :size="24" :score="3"></star>-->
+        <star-rating class="fl" :read-only="true" :star-size="14" :rating="4" :show-rating="false"></star-rating>
         <span class="count fl">月售{{ data.OrderNumber }}</span>
         <span class="distance fr">{{ 23 }}km</span>
         <span class="time fr">{{ data.PSWhenLong }}分钟</span>
@@ -21,18 +21,19 @@
         <span class="average">人均 ¥{{ data.QSPrice }}</span>
       </div>
       <div class="activity" v-for="sup in data.ManJian" :key="sup.ManJianCode">
-        <p><img :src="'http://p0.meituan.net/xianfu/51639e2e7a51c71d967acc44a060e3092048.png'">{{sup.ManJianName}}</p>
+        <p><img :src="'http://p0.meituan.net/xianfu/c2c0f31d0ebf0f60af115d058169c492992.png'">{{sup.ManJianName}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Star from '@/components/star/star.vue'
+// import Star from '@/components/star/star.vue'
+import StarRating from 'vue-star-rating'
 
 export default {
   components: {
-    Star
+    StarRating
   },
   data () {
     return {}
@@ -104,7 +105,9 @@ export default {
         font-size: 12px;
         color: #666;
         margin-top: 7px;
-        .star {}
+        star-rating {
+          text-align: center;
+        }
         .count {
           margin-left: 10px;
         }

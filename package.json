@@ -21,7 +21,10 @@
     "vue-lazyload": "^1.2.2",
     "vuex": "^3.0.1",
     "mint-ui": "^2.2.13",
-    "vuetify": "^1.0.12"
+    "vuetify": "^1.0.12",
+    "vue-star-rating": "^1.5.1",
+    "better-scroll": "^1.9.1",
+    "moment": "^2.22.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

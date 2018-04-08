@@ -13,19 +13,19 @@
     </div>
 
     <v-bottom-nav absolute :value="true" :active.sync="bottomNavValue" color="white" class="bottom-nav">
-      <v-btn flat color="blue" value="home" to="/index/home">
+      <v-btn flat color="blue" value="home" to="./home">
         <span>首页</span>
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn flat color="blue" value="find" to="/index/find">
+      <v-btn flat color="blue" value="find" to="./find">
         <span>发现</span>
         <v-icon>remove_red_eye</v-icon>
       </v-btn>
-      <v-btn flat color="blue" value="order" to="/index/order">
+      <v-btn flat color="blue" value="order" to="./order">
         <span>订单</span>
         <v-icon>list</v-icon>
       </v-btn>
-      <v-btn flat color="blue" value="mine" to="/index/mine">
+      <v-btn flat color="blue" value="mine" to="./mine">
         <span>我的</span>
         <v-icon>person</v-icon>
       </v-btn>

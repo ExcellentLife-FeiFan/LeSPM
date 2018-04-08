@@ -1,4 +1,4 @@
-/* eslint-disable no-new,import/first */
+/* eslint-disable no-new,import/first,import/no-duplicates */
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -28,19 +28,21 @@ Vue.config.productionTip = false
 
 /* Mint UI导入 */
 import Mint from 'mint-ui'
+import {Lazyload} from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(Mint)
+Vue.use(Lazyload)
 
 /* 图片懒加载 */
-import VueLazyload from 'vue-lazyload'
-Vue.use(VueLazyload)
-// or with options
-Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  // error: 'dist/error.png',
-  loading: '/assets/imgs/loading-bars.svg',
-  attempt: 1
-})
+// import VueLazyload from 'vue-lazyload'
+// Vue.use(VueLazyload)
+// // or with options
+// Vue.use(VueLazyload, {
+//   // preLoad: 1.3,
+//   error: '/static/loading-bars.svg',
+//   loading: '/static/loading-bars.svg'
+//   // attempt: 1
+// })
 
 new Vue({
   el: '#app',
