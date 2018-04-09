@@ -48,8 +48,8 @@ export default {
   },
   watch: {},
   methods: {
-    toShopDetail () {
-      this.$router.push({path: '/shopdetail'})
+    toShopDetail: function () {
+      this.$router.push({name: 'shopdetail', params: {shopid: this.data.SupermarketCode}})
     }
   },
   filters: {},

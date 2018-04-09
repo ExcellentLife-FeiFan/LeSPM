@@ -21,19 +21,25 @@
         <router-view :seller="seller"></router-view>
       </keep-alive>
     </transition>
+    <transition name="loading">
+      <loading v-show="showLoading"></loading>
+    </transition>
   </div>
 </template>
 
 <script>
 import SellerHeader from '@/components/seller-header/seller-header'
+import Loading from '@/components/loading.vue'
 // import utils from '@/assets/js/utils.js'
 
 export default {
   components: {
-    SellerHeader
+    SellerHeader, Loading
   },
   data () {
     return {
+      shopid: null,
+      showLoading: true,
       // 商家数据
       // 获取不同商家的 id
       // getId () {
@@ -41,9 +47,7 @@ export default {
       //   // console.log(utils.http.urlParse())
       //   return utils.http.urlParse().id
       // }
-      seller: {
-        id: ''
-      }
+      seller: null
     }
   },
   props: {},
@@ -51,24 +55,18 @@ export default {
   methods: {
     // 初始化商家数据
     _initData () {
-      // vue-resource
-      // this.$http.get('/api/seller').then(res => {
-      //   console.log(res)
-      //   // this.someData = response.body;
-      // }, err => {
-      //   console.log(err)
-      // })
-
-      // axios.get('/api/seller?id=' + this.seller.id).then(res => {
-      //   if (res.data.code === 0) {
-      //     // this.seller = res.data.data
-      //
-      //     // 添加 ID 属性
-      //     this.seller = Object.assign({}, this.seller, res.data.data)
-      //   }
-      // }).catch(err => {
-      //   console.log(err)
-      // })
+      this.shopid = this.$route.params.shopid
+      this.getShopById()
+    },
+    getShopById () {
+      this.$axios.get('/api/API_User/GetSupermarketInfo', {params: {SupermarketCode: this.shopid}}).then((res) => {
+        console.log(res)
+        this.showLoading = false
+        this.seller = Object.assign({}, this.seller, res.data.Obj)
+      }).catch((err) => {
+        console.log(err)
+        this.showLoading = false
+      })
     }
   },
   filters: {},
@@ -115,5 +113,13 @@ export default {
   }
   .router-fade-enter, .router-fade-leave-active {
     opacity: 0;
+  }
+
+  .loading-enter-active, .loading-leave-active {
+    transition: opacity 1s
+  }
+
+  .loading-enter, .loading-leave-active {
+    opacity: 0
   }
 </style>

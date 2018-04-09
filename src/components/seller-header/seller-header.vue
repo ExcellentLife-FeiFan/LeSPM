@@ -5,29 +5,29 @@
     <!-- 主要内容：左侧头像、右侧描述 -->
     <div class="content-wrapper">
       <div class="avatar">
-        <img :src="seller.avatar">
+        <img :src="'http://p0.meituan.net/xianfu/168034337b679ad0a12c0e136328f102165888.jpg'">
       </div>
 
       <div class="content">
         <div class="title">
           <span class="brand"></span>
-          <span class="name">{{ seller.name }}</span>
+          <span class="name">{{ seller.Name }}</span>
         </div>
 
         <div class="description">
-          <span>{{ seller.description }} / {{ seller.deliveryTime }}</span>分钟送达
+          <span>{{ seller.description }} / {{ seller.PSWhenLong }}</span>分钟送达
         </div>
 
         <!-- 活动 -->
-        <div class="supports" v-if="seller.supports">
-          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
-          <span class="text">{{ seller.supports[0].description }}</span>
+        <div class="supports" v-if="seller.ManJian.length">
+          <span class="icon" :class="classMap[1]"></span>
+          <span class="text">{{ seller.ManJian[0].ManJianName }}</span>
         </div>
       </div>
 
       <!-- 活动个数 -->
-      <div class="supports-count" v-if="seller.supports" @click="detailShow = true">
-        <span>{{ seller.supports.length }}个活动</span>
+      <div class="supports-count" v-if="seller.ManJian" @click="detailShow = true">
+        <span>{{ seller.ManJian.length }}个活动</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
@@ -35,13 +35,13 @@
     <!-- 公告 -->
     <div class="bulletin-wrapper" @click="detailShow = true">
       <span class="brand"></span>
-      <span class="text">{{ seller.bulletin }}</span>
+      <span class="text">{{ seller.Notice }}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
 
     <!-- 背景 -->
     <div class="background">
-      <img :src="seller.avatar">
+      <img :src="'http://p0.meituan.net/xianfu/168034337b679ad0a12c0e136328f102165888.jpg'">
     </div>
 
     <!-- 浮层详情 -->
@@ -49,10 +49,10 @@
       <div class="detail" v-show="detailShow">
         <div class="detail-wrapper clearfix">
           <div class="detail-main">
-            <h1 class="name">{{ seller.name }}</h1>
+            <h1 class="name">{{ seller.Name }}</h1>
 
             <div class="star-wrapper">
-              <star :size="48" :score="seller.score"></star>
+              <!--<star :size="48" :score="3"></star>-->
             </div>
 
             <div class="title">
@@ -61,11 +61,11 @@
               <div class="line"></div>
             </div>
 
-            <ul class="detail-supports" v-if="seller.supports">
-          <!--    <li class="supports-item" v-for="(item, index) in seller.supports" :key="item.id">
-                <span class="icon" :class="classMap[seller.supports[index].type]"></span>
-                <span class="text">{{ seller.supports[index].description }}</span>
-              </li>-->
+            <ul class="detail-supports" v-if="seller.ManJian.length">
+              <li class="supports-item" v-for="(item) in seller.ManJian" :key="item.ManJianCode">
+                <span class="icon" :class="classMap[1]"></span>
+                <span class="text">{{ item.ManJianName }}</span>
+              </li>
             </ul>
 
             <div class="title">
@@ -75,7 +75,7 @@
             </div>
 
             <div class="detail-text">
-              <p class="text">{{ seller.bulletin }}</p>
+              <p class="text">{{ seller.Notice }}</p>
             </div>
           </div>
         </div>

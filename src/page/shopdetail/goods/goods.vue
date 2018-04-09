@@ -7,7 +7,7 @@
       <!-- 左侧菜单 -->
       <div class="menu-wrapper" ref="menuRef">
         <ul>
-          <li class="menu-item"
+         <!-- <li class="menu-item"
               v-for="(item, index) in goods"
               :class="{'current': currentIndex === index}"
               @click="selectMenu(index, $event)" :key="item.id">
@@ -15,14 +15,14 @@
               <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>
               {{ item.name }}
             </span>
-          </li>
+          </li>-->
         </ul>
       </div>
 
       <!-- 右侧食物列表 -->
       <div class="foods-wrapper" ref="foodsRef">
         <ul>
-          <li class="foods-list foods-list-hook" v-for="item in goods" ref="foodList" :key="item.id">
+         <!-- <li class="foods-list foods-list-hook" v-for="item in goods" ref="foodList" :key="item.id">
             <h1 class="title">{{ item.name }}</h1>
 
             <ul>
@@ -51,15 +51,15 @@
                 </div>
               </li>
             </ul>
-          </li>
+          </li>-->
         </ul>
       </div>
 
       <!-- 购物车 -->
       <shopcart ref="shopcartRef"
                 :selectFoods="selectFoods"
-                :deliveryPrice="seller.deliveryPrice"
-                :minPrice="seller.minPrice"></shopcart>
+                :deliveryPrice="seller.PSPrice"
+                :minPrice="seller.QSPrice"></shopcart>
     </div>
 
     <!-- 商品详情页 -->

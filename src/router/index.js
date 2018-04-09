@@ -47,26 +47,22 @@ export default new Router({
         }]
     },
     {
-      path: '/shopdetail',
+      name: 'shopdetail',
+      path: '/shopdetail/:shopid/goods',
       component: shopdetail,
       children: [
         {
           path: '',
-          redirect: 'goods'
+          redirect: 'goods',
+          component: goods
         },
         {
           path: 'goods',
-          component: goods,
-          meta: {keepAlive: true}
+          component: goods
         },
-        // {
-        //   path: 'goodsDetail',
-        //   component: goodsDetail
-        // },
         {
           path: 'ratings',
-          component: ratings,
-          meta: {keepAlive: true}
+          component: ratings
         },
         {
           path: 'seller',
