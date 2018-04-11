@@ -3,46 +3,46 @@
 <template>
   <div>
     <!-- 左右联动 -->
-    <div class="goods">
+    <div class="goods-contained">
       <!-- 左侧菜单 -->
       <div class="menu-wrapper" ref="menuRef">
         <ul>
-         <!-- <li class="menu-item"
+          <li class="menu-item"
               v-for="(item, index) in goods"
               :class="{'current': currentIndex === index}"
-              @click="selectMenu(index, $event)" :key="item.id">
+              @click="selectMenu(index, $event)" :key="item.GoodsTypeCode">
             <span class="text">
-              <span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>
-              {{ item.name }}
+              <span class="icon" v-show="-1 > 0" :class="classMap[1]"></span>
+              {{ item.GoodsTypeName }}
             </span>
-          </li>-->
+          </li>
         </ul>
       </div>
 
       <!-- 右侧食物列表 -->
       <div class="foods-wrapper" ref="foodsRef">
         <ul>
-         <!-- <li class="foods-list foods-list-hook" v-for="item in goods" ref="foodList" :key="item.id">
-            <h1 class="title">{{ item.name }}</h1>
+          <li class="foods-list foods-list-hook" v-for="item in goods" ref="foodList" :key="item.GoodsTypeCode">
+            <h1 class="menu-title">{{ item.GoodsTypeName }}</h1>
 
             <ul>
-              <li class="foods-item" v-for="food in item.foods" @click="toFoodDetail(food, $event)" :key="food.id">
+              <li class="foods-item" v-for="food in item.Children" @click="toFoodDetail(food, $event)" :key="food.GoodsCode">
                 <div class="icon">
-                  <img v-lazy="food.icon">
+                  <img v-lazy="'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114'">
                 </div>
 
                 <div class="content">
-                  <h2 class="name">{{ food.name }}</h2>
-                  <p class="desc">{{ food.description }}</p>
+                  <h2 class="name">{{ food.GoodsTitle }}</h2>
+                  <p class="desc">{{ food.Content }}</p>
 
                   <div class="extra">
-                    <span class="count">月售{{ food.sellCount }}份</span>
-                    <span class="rating">好评率{{ food.rating }}%</span>
+                    <span class="count">月售{{ food.SaleNumber }}份</span>
+                    <span class="rating">好评率{{ 100 }}%</span>
                   </div>
 
                   <div class="price">
-                    <span class="now">￥{{ food.price }}</span>
-                    <span class="old" v-show="food.oldPrice">￥{{ food.oldPrice }}</span>
+                    <span class="now">￥{{ food.XPrice }}</span>
+                    <span class="old" v-show="food.YPrice">￥{{ food.YPrice }}</span>
                   </div>
 
                   <div class="control">
@@ -51,7 +51,7 @@
                 </div>
               </li>
             </ul>
-          </li>-->
+          </li>
         </ul>
       </div>
 
@@ -72,7 +72,6 @@ import Shopcart from '@/components/shopcart/shopcart'
 import CartControl from '@/components/cart-control/cart-control'
 import GoodsDetail from '@/page/shopdetail/goods-detail/goods-detail'
 import BScroll from 'better-scroll'
-import axios from 'axios'
 
 export default {
   components: {
@@ -104,21 +103,7 @@ export default {
   methods: {
     // 初始化数据
     _initData () {
-      axios.get('/api/goods').then(res => {
-        if (res.data.code === 0) {
-          this.goods = res.data.data
-        }
-
-        // DOM 渲染完成才能进行计算
-        setTimeout(() => {
-          // 初始化 BScroll
-          this._initScroll()
-          // 计算右侧每一大项的高度
-          this._calcHeight()
-        }, 20)
-      }).catch(err => {
-        console.log(err)
-      })
+      this.getGoods()
     },
     // 初始化 BScroll
     _initScroll () {
@@ -147,6 +132,21 @@ export default {
       }
       // (10) [0, 1172, 1343, 1478, 1828, 2070, 2334, 2685, 3251, 4035]
       // console.log(this.listHeight)
+    },
+    getGoods () {
+      this.$axios.get('/api/API_User/GetGoodsBySupermarket', {params: {SupermarketCode: this.seller.SupermarketCode}}).then((res) => {
+        console.log(res)
+        this.goods = res.data.Obj
+        // DOM 渲染完成才能进行计算
+        setTimeout(() => {
+          // 初始化 BScroll
+          this._initScroll()
+          // 计算右侧每一大项的高度
+          this._calcHeight()
+        }, 20)
+      }).catch((err) => {
+        console.log(err)
+      })
     },
     // better-scroll 默认会阻止浏览器的原生 click 事件。
     // 当设置为 true，better-scroll 会派发一个 click 事件
@@ -195,11 +195,11 @@ export default {
       let select = []
       // 之前一直错，可能是 this 指向问题，不用箭头函数
       this.goods.forEach((good) => {
-        good.foods.forEach((food) => {
-          if (food.count) {
-            select.push(food)
-          }
-        })
+        // good.Children.forEach((food) => {
+        //   if (food.count) {
+        //     select.push(food)
+        //   }
+        // })
       })
       return select
     }
@@ -214,144 +214,144 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/const.scss';
-@import '~@/assets/scss/mixin.scss';
+  @import '~@/assets/scss/const.scss';
+  @import '~@/assets/scss/mixin.scss';
 
-.goods {
-  display: flex;
-  position: absolute;
-  top: 174px;
-  bottom: 46px;
-  width: 100%;
-  background-color: #fff;
-  overflow: hidden;
-  .menu-wrapper {
-    flex: 0 0 80px;
-    width: 80px;
-    background-color: #f3f5f7;
-    .menu-item {
-      display: table;
-      width: 56px;
-      height: 54px;
-      line-height: 14px;
-      padding: 0 12px;
-      @include onepx('bottom', true);
-      &.current {
-        position: relative;
-        margin-top: -1px;
-        background-color: #fff;
-        font-weight: 700;
-        z-index: 10;
-      }
-      .text {
-        font-size: 12px;
-        display: table-cell;
-        vertical-align: middle;
-        .icon {
-          display: inline-block;
-          width: 12px;
-          height: 12px;
-          margin-right: 2px;
-          background-size: 12px 12px;
-          background-repeat: no-repeat;
-          vertical-align: top;
-          &.decrease {
-            @include bg-image('./img/decrease_3');
-          }
-          &.discount {
-            @include bg-image('./img/discount_3');
-          }
-          &.guarantee {
-            @include bg-image('./img/guarantee_3');
-          }
-          &.invoice {
-            @include bg-image('./img/invoice_3');
-          }
-          &.special {
-            @include bg-image('./img/special_3');
+  .goods-contained {
+    display: flex;
+    position: absolute;
+    top: 174px;
+    bottom: 46px;
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    .menu-wrapper {
+      flex: 0 0 80px;
+      width: 80px;
+      background-color: #f3f5f7;
+      .menu-item {
+        display: table;
+        width: 80px;
+        height: 54px;
+        line-height: 14px;
+        padding: 0 12px;
+        @include onepx('bottom', true);
+        &.current {
+          position: relative;
+          margin-top: -1px;
+          background-color: #fff;
+          font-weight: 700;
+          z-index: 10;
+        }
+        .text {
+          font-size: 12px;
+          display: table-cell;
+          vertical-align: middle;
+          .icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 2px;
+            background-size: 12px 12px;
+            background-repeat: no-repeat;
+            vertical-align: top;
+            &.decrease {
+              @include bg-image('./img/decrease_3');
+            }
+            &.discount {
+              @include bg-image('./img/discount_3');
+            }
+            &.guarantee {
+              @include bg-image('./img/guarantee_3');
+            }
+            &.invoice {
+              @include bg-image('./img/invoice_3');
+            }
+            &.special {
+              @include bg-image('./img/special_3');
+            }
           }
         }
       }
     }
-  }
-  .foods-wrapper {
-    flex: 1;
-    .foods-list {
-      .title {
-        padding-left: 14px;
-        height: 26px;
-        line-height: 26px;
-        border-left: 2px solid #d9dde1;
-        font-size: 12px;
-        color: rgb(147, 153, 159);
-        background-color: #f3f5f7;
-      }
-      .foods-item {
-        position: relative;
-        display: flex;
-        margin: 18px;
-        padding-bottom: 18px;
-        @include onepx('bottom', true);
-        .icon {
-          flex: 0 0 57px;
-          width: 57px;
-          height: 57px;
-          margin-right: 10px;
-          img {
+    .foods-wrapper {
+      flex: 1;
+      .foods-list {
+        .menu-title {
+          padding-left: 14px;
+          height: 26px;
+          line-height: 26px;
+          border-left: 2px solid #d9dde1;
+          font-size: 12px;
+          color: rgb(147, 153, 159);
+          background-color: #f3f5f7;
+        }
+        .foods-item {
+          position: relative;
+          display: flex;
+          margin: 18px;
+          padding-bottom: 18px;
+          @include onepx('bottom', true);
+          .icon {
+            flex: 0 0 57px;
             width: 57px;
             height: 57px;
-          }
-        }
-        .content {
-          flex: 1;
-          .name {
-            font-size: 14px;
-            margin: 2px 0 8px 0;
-            height: 14px;
-            line-height: 14px;
-            color: rgb(7, 17, 27);
-          }
-          .desc {
-            margin-bottom: 8px;
-            line-height: 14px;
-            font-size: 10px;
-            color: rgb(147, 153, 159);
-          }
-          .extra {
-            margin-bottom: 8px;
-            line-height: 12px;
-            font-size: 0;
-            color: rgb(147, 153, 159);
-            .count {
-              font-size: 10px;
-              margin-right: 12px;
-            }
-            .rating {
-              font-size: 10px;
+            margin-right: 10px;
+            img {
+              width: 57px;
+              height: 57px;
             }
           }
-          .price {
-            font-weight: 700;
-            line-height: 24px;
-            .now {
-              margin-right: 8px;
+          .content {
+            flex: 1;
+            .name {
               font-size: 14px;
-              color: rgb(240, 20, 20);
+              margin: 2px 0 8px 0;
+              height: 14px;
+              line-height: 14px;
+              color: rgb(7, 17, 27);
             }
-            .old {
+            .desc {
+              margin-bottom: 8px;
+              line-height: 14px;
               font-size: 10px;
               color: rgb(147, 153, 159);
-              text-decoration: line-through;
             }
-          }
-          .control {
-            position: absolute;
-            right: 0;
-            bottom: 1px;
+            .extra {
+              margin-bottom: 8px;
+              line-height: 12px;
+              font-size: 0;
+              color: rgb(147, 153, 159);
+              .count {
+                font-size: 10px;
+                margin-right: 12px;
+              }
+              .rating {
+                font-size: 10px;
+              }
+            }
+            .price {
+              font-weight: 700;
+              line-height: 24px;
+              .now {
+                margin-right: 8px;
+                font-size: 14px;
+                color: rgb(240, 20, 20);
+              }
+              .old {
+                font-size: 10px;
+                color: rgb(147, 153, 159);
+                text-decoration: line-through;
+              }
+            }
+            .control {
+              position: absolute;
+              right: 0;
+              bottom: 1px;
+            }
           }
         }
       }
     }
   }
-}
 </style>

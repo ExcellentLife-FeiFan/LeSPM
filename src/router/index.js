@@ -48,14 +48,9 @@ export default new Router({
     },
     {
       name: 'shopdetail',
-      path: '/shopdetail/:shopid/goods',
+      path: '/shopdetail/:shopid',
       component: shopdetail,
       children: [
-        {
-          path: '',
-          redirect: 'goods',
-          component: goods
-        },
         {
           path: 'goods',
           component: goods

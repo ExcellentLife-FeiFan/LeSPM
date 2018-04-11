@@ -7,13 +7,13 @@
 
     <div class="tab">
       <div class="tab-item">
-        <router-link to="./goods">点菜</router-link>
+        <router-link :to="{path:'/shopdetail/'+this.shopid+'/goods'}">点菜</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="./ratings">评价</router-link>
+        <router-link :to="{path:'/shopdetail/'+this.shopid+'/ratings'}">评价</router-link>
       </div>
       <div class="tab-item">
-        <router-link to="./seller">商家</router-link>
+        <router-link :to="{path:'/shopdetail/'+this.shopid+'/seller'}">商家</router-link>
       </div>
     </div>
     <transition name="router-fade" mode="out-in">
@@ -40,13 +40,6 @@ export default {
     return {
       shopid: null,
       showLoading: true,
-      // 商家数据
-      // 获取不同商家的 id
-      // getId () {
-      //   // http://localhost:8080/?id=001#/restaurant/seller
-      //   // console.log(utils.http.urlParse())
-      //   return utils.http.urlParse().id
-      // }
       seller: null
     }
   },
@@ -63,6 +56,7 @@ export default {
         console.log(res)
         this.showLoading = false
         this.seller = Object.assign({}, this.seller, res.data.Obj)
+        this.$router.push({path: '/shopdetail/' + this.shopid + '/goods'})
       }).catch((err) => {
         console.log(err)
         this.showLoading = false
