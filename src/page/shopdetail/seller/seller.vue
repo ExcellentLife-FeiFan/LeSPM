@@ -6,35 +6,35 @@
       <!-- 概览 -->
       <div class="overview">
         <div class="collect">
-          <div class="name">{{seller.name}}</div>
+          <div class="name">{{seller.Name}}</div>
 
           <div class="star-wrapper">
-            <star :size="36" :score="seller.score"></star>
-            <span class="ratingCount">({{seller.ratingCount}})</span>
+            <star-rating  class="star" :read-only="true" :star-size="18" :rating="4" :show-rating="false"></star-rating>
+            <span class="ratingCount">({{20}})</span>
           </div>
 
-          <div class="sellCount">月售{{seller.sellCount}}单</div>
+          <div class="sellCount">月售{{seller.OrderNumber}}单</div>
 
           <div class="collect-icon" @click="toggleFavorites">
-            <i class="icon-favorite" :class="{'active': favorite}"></i>
-            <div class="text">{{favorite?'已收藏':'未收藏'}}</div>
+            <i class="icon-favorite" :class="{'active': true}"></i>
+            <div class="text">{{true?'已收藏':'未收藏'}}</div>
           </div>
         </div>
 
         <div class="param">
           <div class="left">
             <span class="text">起送价</span>
-            <span class="price"><span class="num">{{seller.minPrice}}</span>元</span>
+            <span class="price"><span class="num">{{seller.QSPrice}}</span>元</span>
           </div>
 
           <div class="mid">
             <span class="text">商家配送</span>
-            <span class="price"><span class="num">{{seller.deliveryPrice}}</span>元</span>
+            <span class="price"><span class="num">{{seller.QSPrice}}</span>元</span>
           </div>
 
           <div class="right">
             <span class="text">平均配送时间</span>
-            <span class="price"><span class="num">{{seller.deliveryTime}}</span>分钟</span>
+            <span class="price"><span class="num">{{seller.PSWhenLong}}</span>分钟</span>
           </div>
         </div>
       </div>
@@ -45,12 +45,12 @@
       <!-- 公告与活动 -->
       <div class="notice">
         <h1 class="title">公告与活动</h1>
-        <div class="text">{{seller.bulletin}}</div>
+        <div class="text">{{seller.Notice}}</div>
 
-        <ul v-if="seller.supports">
-          <li class="support" v-for="support in seller.supports" :key="support.id">
-            <span class="icon" :class="classMap[support.type]"></span>
-            <span class="description">{{support.description}}</span>
+        <ul v-if="seller.ManJian">
+          <li class="support" v-for="support in seller.ManJian" :key="support.ManJianCode">
+            <span class="icon" :class="classMap[1]"></span>
+            <span class="description">{{support.ManJianName}}</span>
           </li>
         </ul>
       </div>
@@ -64,9 +64,9 @@
 
         <div class="pic-wrapper" ref="picRef">
           <ul class="pic-list" ref="picListRef">
-            <li class="pic-item" v-for="pic in seller.pics" :key="pic">
-              <img :src="pic">
-            </li>
+            <!--<li class="pic-item" v-for="pic in seller.pics" :key="pic">-->
+              <!--<img :src="pic">-->
+            <!--</li>-->
           </ul>
         </div>
       </div>
@@ -77,7 +77,7 @@
       <div class="info">
         <h1 class="title">商家信息</h1>
         <ul>
-          <li v-for="item in seller.infos" class="item" :key="item.id">{{item}}</li>
+          <!--<li v-for="item in seller.infos" class="item" :key="item.id">{{item}}</li>-->
         </ul>
       </div>
     </div>
@@ -85,14 +85,14 @@
 </template>
 
 <script>
-import Star from '@/components/star/star'
+import StarRating from 'vue-star-rating'
 import BScroll from 'better-scroll'
 import CrossLine from '@/components/cross-line/cross-line'
 // import store from '@/assets/js/store.js'
 
 export default {
   components: {
-    Star,
+    StarRating,
     CrossLine
   },
   data () {

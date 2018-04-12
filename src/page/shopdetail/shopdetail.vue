@@ -18,7 +18,7 @@
     </div>
     <transition name="router-fade" mode="out-in">
       <keep-alive>
-        <router-view :seller="seller"></router-view>
+        <router-view v-if="seller" :seller="seller"></router-view>
       </keep-alive>
     </transition>
     <transition name="loading">
@@ -55,7 +55,7 @@ export default {
       this.$axios.get('/api/API_User/GetSupermarketInfo', {params: {SupermarketCode: this.shopid}}).then((res) => {
         console.log(res)
         this.showLoading = false
-        this.seller = Object.assign({}, this.seller, res.data.Obj)
+        this.seller = res.data.Obj // Object.assign({}, this.seller, res.data.Obj)
         this.$router.push({path: '/shopdetail/' + this.shopid + '/goods'})
       }).catch((err) => {
         console.log(err)
@@ -66,10 +66,11 @@ export default {
   filters: {},
   computed: {},
   created () {
+  },
+  mounted () {
     // 初始化商家数据
     this._initData()
   },
-  mounted () {},
   destroyed () {}
 }
 </script>

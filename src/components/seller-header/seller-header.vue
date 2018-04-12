@@ -52,7 +52,7 @@
             <h1 class="name">{{ seller.Name }}</h1>
 
             <div class="star-wrapper">
-              <!--<star :size="48" :score="3"></star>-->
+              <star-rating class="star" :read-only="true" :star-size="30" :rating="4" :show-rating="false"></star-rating>
             </div>
 
             <div class="title">
@@ -94,11 +94,11 @@
 </template>
 
 <script>
-import Star from '@/components/star/star'
+import StarRating from 'vue-star-rating'
 
 export default {
   components: {
-    Star
+    StarRating
   },
   data () {
     return {
@@ -296,6 +296,9 @@ export default {
           margin-top: 18px;
           padding: 2px 0;
           text-align: center;
+          .star{
+            display: inline-block;
+          }
         }
         .title {
           display: flex;

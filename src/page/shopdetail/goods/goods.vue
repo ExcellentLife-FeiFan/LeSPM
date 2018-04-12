@@ -26,27 +26,27 @@
             <h1 class="menu-title">{{ item.GoodsTypeName }}</h1>
 
             <ul>
-              <li class="foods-item" v-for="food in item.Children" @click="toFoodDetail(food, $event)" :key="food.GoodsCode">
+              <li class="foods-item" v-for="good in item.Children" @click="toFoodDetail(good, $event)" :key="good.GoodsCode">
                 <div class="icon">
                   <img v-lazy="'http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114'">
                 </div>
 
-                <div class="content">
-                  <h2 class="name">{{ food.GoodsTitle }}</h2>
-                  <p class="desc">{{ food.Content }}</p>
+                <div class="content-m">
+                  <h2 class="name">{{ good.GoodsTitle }}</h2>
+                  <p class="desc">{{ good.Content }}</p>
 
                   <div class="extra">
-                    <span class="count">月售{{ food.SaleNumber }}份</span>
+                    <span class="count">月售{{ good.SaleNumber }}份</span>
                     <span class="rating">好评率{{ 100 }}%</span>
                   </div>
 
                   <div class="price">
-                    <span class="now">￥{{ food.XPrice }}</span>
-                    <span class="old" v-show="food.YPrice">￥{{ food.YPrice }}</span>
+                    <span class="now">￥{{ good.XPrice }}</span>
+                    <span class="old" v-show="good.YPrice">￥{{ good.YPrice }}</span>
                   </div>
 
                   <div class="control">
-                    <cart-control :food="food" @drop="drop"></cart-control>
+                    <cart-control :food="good" :shopid="seller.SupermarketCode" @drop="drop"></cart-control>
                   </div>
                 </div>
               </li>
@@ -57,13 +57,13 @@
 
       <!-- 购物车 -->
       <shopcart ref="shopcartRef"
-                :selectFoods="selectFoods"
                 :deliveryPrice="seller.PSPrice"
+                :shopid="seller.SupermarketCode"
                 :minPrice="seller.QSPrice"></shopcart>
     </div>
 
     <!-- 商品详情页 -->
-    <goods-detail @drop="drop" :food="selectedFood" ref="goodsDetailRef"></goods-detail>
+    <goods-detail @drop="drop" :food="selectedFood" :shopid="seller.SupermarketCode" ref="goodsDetailRef"></goods-detail>
   </div>
 </template>
 
@@ -72,6 +72,7 @@ import Shopcart from '@/components/shopcart/shopcart'
 import CartControl from '@/components/cart-control/cart-control'
 import GoodsDetail from '@/page/shopdetail/goods-detail/goods-detail'
 import BScroll from 'better-scroll'
+import {mapMutations} from 'vuex'
 
 export default {
   components: {
@@ -101,9 +102,13 @@ export default {
   },
   watch: {},
   methods: {
+    ...mapMutations([
+      'INIT_BUYCART'
+    ]),
     // 初始化数据
     _initData () {
       this.getGoods()
+      this.INIT_BUYCART()
     },
     // 初始化 BScroll
     _initScroll () {
@@ -195,11 +200,11 @@ export default {
       let select = []
       // 之前一直错，可能是 this 指向问题，不用箭头函数
       this.goods.forEach((good) => {
-        // good.Children.forEach((food) => {
-        //   if (food.count) {
-        //     select.push(food)
-        //   }
-        // })
+        good.Children.forEach((food) => {
+          if (food.count) {
+            select.push(food)
+          }
+        })
       })
       return select
     }
@@ -302,7 +307,7 @@ export default {
               height: 57px;
             }
           }
-          .content {
+          .content-m {
             flex: 1;
             .name {
               font-size: 14px;
@@ -331,10 +336,10 @@ export default {
               }
             }
             .price {
-              font-weight: 700;
               line-height: 24px;
               .now {
-                margin-right: 8px;
+                font-weight: 700;
+                margin-right: 2px;
                 font-size: 14px;
                 color: rgb(240, 20, 20);
               }

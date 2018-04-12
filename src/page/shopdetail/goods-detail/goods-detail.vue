@@ -7,29 +7,31 @@
       <div>
         <!-- 商品图片 -->
         <div class="image-header">
-          <img :src="food.image">
+          <img :src="'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523535419643&di=1d04985007345b0367032bebe2daa05d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F472309f790529822c7567317ddca7bcb0b46d4f9.jpg'">
         </div>
 
         <!-- 标题信息 -->
         <div class="title-content">
-          <div class="name">{{food.name}}</div>
+          <div class="name">{{food.GoodsTitle}}</div>
 
           <div class="detail">
-            <div class="count">月售{{food.sellCount}}份</div>
-            <div class="rating">好评率{{food.rating}}%</div>
+            <div class="count">月售{{food.SaleNumber}}份</div>
+            <div class="rating">好评率{{80}}%</div>
           </div>
 
           <div class="price">
-            <span class="now">￥{{food.price}}</span>
-            <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+            <span class="now">￥{{food.XPrice}}</span>
+            <span class="old" v-show="food.YPrice">￥{{food.YPrice}}</span>
           </div>
 
           <div class="control">
-            <cart-control :food="food" @drop="drop"></cart-control>
+            <transition name="fade">
+            <cart-control :food="food" :shopid="shopid" @drop="drop" v-show="foodNum>0"></cart-control>
+            </transition>
           </div>
 
           <transition name="fade">
-            <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count===0">
+            <div class="buy" @click.stop.prevent="addFirst" v-show="foodNum===0">
               加入购物车
             </div>
           </transition>
@@ -93,9 +95,9 @@
 import CartControl from '@/components/cart-control/cart-control'
 import CrossLine from '@/components/cross-line/cross-line'
 import RatingsSelect from '@/components/ratings-select/ratings-select'
-import Vue from 'vue'
 import moment from 'moment'
 import BScroll from 'better-scroll'
+import {mapState, mapMutations} from 'vuex'
 
 const ALL = 2
 
@@ -125,10 +127,14 @@ export default {
     // 该页维护的商品
     food: {
       type: Object
-    }
+    },
+    shopid: null
   },
   watch: {},
   methods: {
+    ...mapMutations([
+      'ADD_CART'
+    ]),
     show () {
       this.pageShow = true
 
@@ -155,8 +161,7 @@ export default {
       if (!event._constructed) {
         return
       }
-      Vue.set(this.food, 'count', 1)
-
+      this.ADD_CART({shopid: this.shopid, categoryid: this.food.GoodsTypeCode, goodid: this.food.GoodsCode, good: this.food})
       // 将当前 dom 传递出去，用来做小球飞入效果
       this.$emit('drop', event.target)
     },
@@ -195,7 +200,25 @@ export default {
       return moment(time).format('YYYY-MM-DD, hh:mm')
     }
   },
-  computed: {},
+  computed: {
+    ...mapState([
+      'cartList'
+    ]),
+    /**
+     * 监听cartList变化，更新当前商铺的购物车信息shopCart，同时返回一个新的对象
+     */
+    shopCart: function () {
+      return Object.assign({}, this.cartList[this.shopid])
+    },
+    // shopCart变化的时候重新计算当前商品的数量
+    foodNum: function () {
+      if (this.shopCart && this.shopCart[this.food.GoodsTypeCode] && this.shopCart[this.food.GoodsTypeCode][this.food.GoodsCode]) {
+        return this.shopCart[this.food.GoodsTypeCode][this.food.GoodsCode]['num']
+      } else {
+        return 0
+      }
+    }
+  },
   created () {},
   mounted () {}
 }

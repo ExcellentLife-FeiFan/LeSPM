@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 const state = {
   latitude: '123124241.22',
-  longitude: '31232354235.11'
+  longitude: '31232354235.11',
+  cartList: {} // 加入购物车的商品列表
 }
 
 export default new Vuex.Store({

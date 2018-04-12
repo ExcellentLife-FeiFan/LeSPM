@@ -6,25 +6,25 @@
       <!-- 概览 -->
       <div class="overview">
         <div class="left">
-          <h1 class="score">{{seller.score}}</h1>
-          <div class="title">综合评分</div>
-          <div class="rank">高于周边商家{{seller.rankRate}}%</div>
+          <h1 class="score">{{4.5}}</h1>
+          <div class="title-m">综合评分</div>
+          <div class="rank">高于周边商家{{90}}%</div>
         </div>
 
         <div class="right">
-          <div class="service">
-            <span class="title">服务态度</span>
-            <star :size="36" :score="seller.serviceScore"></star>
-            <span class="score">{{seller.serviceScore}}</span>
+          <div class="service-m">
+            <span class="title-m">服务态度</span>
+            <star-rating  class="star" :read-only="true" :star-size="14" :rating="4" :show-rating="false"></star-rating>
+            <span class="score">{{4.2}}</span>
           </div>
-          <div class="goods">
-            <span class="title">商品评分</span>
-            <star :size="36" :score="seller.foodScore"></star>
-            <span class="score">{{seller.foodScore}}</span>
+          <div class="goods-m">
+            <span class="title-m">商品评分</span>
+            <star-rating class="star" :read-only="true" :star-size="14" :rating="4" :show-rating="false"></star-rating>
+            <span class="score">{{4.2}}</span>
           </div>
           <div class="delivery">
-            <span class="title">送达时间</span>
-            <span class="time">{{seller.deliveryTime}}分钟</span>
+            <span class="title-m">送达时间</span>
+            <span class="time">{{seller.PSWhenLong}}分钟</span>
           </div>
         </div>
       </div>
@@ -76,18 +76,18 @@
 </template>
 
 <script>
-import Star from '@/components/star/star'
 import CrossLine from '@/components/cross-line/cross-line'
 import RatingsSelect from '@/components/ratings-select/ratings-select'
 import moment from 'moment'
 import axios from 'axios'
 import BScroll from 'better-scroll'
+import StarRating from 'vue-star-rating'
 
 const ALL = 2
 
 export default {
   components: {
-    Star,
+    StarRating,
     RatingsSelect,
     CrossLine
   },
@@ -200,7 +200,7 @@ export default {
           color: rgb(255, 153, 0);
           margin-bottom: 6px;
         }
-        .title {
+        .title-m {
           line-height: 12px;
           font-size: 12px;
           color: rgb(7, 17, 27);
@@ -215,15 +215,15 @@ export default {
       .right {
         flex: 1;
         padding: 6px 0 6px 24px;
-        .service, .goods {
+        .service-m, .goods-m {
           margin-bottom: 8px;
           line-height: 18px;
           font-size: 0;
-          .title {
+          .title-m {
             font-size: 12px;
             color: rgb(7, 17, 27);
           }
-          .star {
+          .star{
             display: inline-block;
             vertical-align: top;
             margin: 0 12px;
@@ -236,7 +236,7 @@ export default {
         .delivery {
           line-height: 18px;
           font-size: 0;
-          .title {
+          .title-m {
             font-size: 12px;
             color: rgb(7, 17, 27);
           }
@@ -286,7 +286,7 @@ export default {
           .star-wrapper {
             margin-bottom: 4px;
             font-size: 0;
-            .star {
+            .star-rating {
               display: inline-block;
               vertical-align: top;
               margin-right: 6px;

@@ -41,21 +41,21 @@
       <transition name="fold">
         <div class="shopcart-list" v-show="listShow">
           <div class="list-header">
-            <h1 class="title">购物车</h1>
+            <h1 class="title-m">购物车</h1>
             <span class="empty" @click="empty">清空</span>
           </div>
 
           <div class="list-content" ref="listContentRef">
             <ul>
-              <li class="food" v-for="food in selectFoods" :key="food.id">
-                <span class="name">{{ food.name }}</span>
-
-                <div class="price">
-                  <span>￥{{ food.price * food.count }}</span>
-                </div>
-
-                <div class="control">
-                  <cart-control :food="food"></cart-control>
+              <li class="food" v-for="good in cartFoodList"  v-if="good" :key="good.good.GoodsCode">
+                <div v-show="good">
+                  <span class="name">{{ good.good.GoodsTitle }}</span>
+                  <div class="price">
+                    <span>￥{{ good.good.XPrice * good.num }}</span>
+                  </div>
+                  <div class="control">
+                    <cart-control :food="good.good" :shopid="shopid"></cart-control>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -75,6 +75,7 @@
 import CartControl from '@/components/cart-control/cart-control'
 import BScroll from 'better-scroll'
 import { MessageBox } from 'mint-ui'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   components: {
@@ -98,36 +99,45 @@ export default {
       // 已经下落的小球（show = true）
       dropBalls: [],
       // 购物车列表是否折叠
-      listShow: false
+      listShow: false,
+      cartFoodList: [] // 购物车商品列表
+      // totalPrice: 0 // 总共价格
     }
   },
   props: {
-    // 加入购物车的商品
-    selectFoods: {
-      type: Array,
-      default () {
-        return []
-      }
-    },
+    // // 加入购物车的商品
+    // selectFoods: {
+    //   type: Array,
+    //   default () {
+    //     return []
+    //   }
+    // },
     // 配送费
     deliveryPrice: {
-      type: Number,
+      type: [String, Number],
       default: 0
     },
     // 起送费
     minPrice: {
-      type: Number,
+      type: [String, Number],
       default: 0
-    }
+    },
+    shopid: null
   },
   watch: {
-    selectFoods () {
+    cartFoodList () {
       if (this.scroll) {
         this.scroll.refresh()
       }
+    },
+    shopCart: function (value) {
+      this.initCategoryNum()
     }
   },
   methods: {
+    ...mapMutations([
+      'CLEAR_CART', 'INIT_BUYCART'
+    ]),
     // 点击 + 派发的事件
     // 取一个未下落的小球执行接下来的下落动作
     drop (el) {
@@ -215,31 +225,53 @@ export default {
     },
     // 清空
     empty () {
-      this.selectFoods.forEach((food) => {
-        food.count = 0
-      })
-
+      this.CLEAR_CART(this.shopid)
       this.listShow = false
     },
     hideList () {
       this.listShow = false
+    },
+    initCategoryNum () {
+      alert('initCategoryNum')
+      let newcartFoodList = []
+      if (this.shopCart) {
+        Object.values(this.shopCart).forEach(category => {
+          Object.values(category).forEach(good => {
+            if (good.num > 0) {
+              newcartFoodList.push(good)
+            }
+          })
+        })
+        this.cartFoodList = [...newcartFoodList]
+      }
     }
   },
   filters: {},
   computed: {
+    ...mapState([
+      'cartList'
+    ]),
+    // 当前商店购物信息
+    shopCart: function () {
+      return {...this.cartList[this.shopid]}
+    },
     // 所选商品总价
     totalPrice () {
       let total = 0
-      this.selectFoods.forEach((food) => {
-        total += food.price * food.count
+      this.cartFoodList.forEach((good) => {
+        if (good) {
+          total += parseFloat(good.good.XPrice) * good.num
+        }
       })
       return total
     },
     // 所选商品总数量
     totalCount () {
       let total = 0
-      this.selectFoods.forEach((food) => {
-        total += food.count
+      this.cartFoodList.forEach((good) => {
+        if (good) {
+          total += good.num
+        }
       })
       return total
     },
@@ -255,8 +287,11 @@ export default {
     }
   },
   created () {},
-  mounted () {},
+  mounted () {
+    this.initCategoryNum()
+  },
   destroyed () {}
+
 }
 </script>
 
@@ -413,7 +448,7 @@ export default {
         padding: 0 18px;
         background-color: #f3f5f7;
         border-bottom: 1px solid rgba(7, 17, 27, 0.1);
-        .title {
+        .title-m {
           float: left;
           font-size: 14px;
           color: rgb(7, 17, 27);
