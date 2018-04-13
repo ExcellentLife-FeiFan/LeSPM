@@ -56,7 +56,7 @@ export default {
         console.log(res)
         this.showLoading = false
         this.seller = res.data.Obj // Object.assign({}, this.seller, res.data.Obj)
-        this.$router.push({path: '/shopdetail/' + this.shopid + '/goods'})
+        // this.$router.push({path: '/shopdetail/' + this.shopid + '/goods'})
       }).catch((err) => {
         console.log(err)
         this.showLoading = false
@@ -80,6 +80,7 @@ export default {
   @import '~@/assets/scss/mixin.scss';
 
   .shop-detail {
+    height: fit-content;
     .tab {
       display: flex;
       flex-direction: row;

@@ -185,6 +185,7 @@ export default {
   background-color: #fff;
   overflow: hidden;
   .ratings-content {
+    height: fit-content;
     .overview {
       display: flex;
       padding: 18px 0;

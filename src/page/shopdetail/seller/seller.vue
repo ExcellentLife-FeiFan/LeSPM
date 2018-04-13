@@ -2,7 +2,6 @@
 
 <template>
   <div class="seller" ref="sellerRef">
-    <div>
       <!-- 概览 -->
       <div class="overview">
         <div class="collect">
@@ -80,7 +79,6 @@
           <!--<li v-for="item in seller.infos" class="item" :key="item.id">{{item}}</li>-->
         </ul>
       </div>
-    </div>
   </div>
 </template>
 
@@ -184,6 +182,7 @@ export default {
   background-color: #fff
   overflow: hidden
   .overview
+    height: fit-content
     position: relative
     padding: 18px
     .collect
@@ -253,6 +252,7 @@ export default {
       .right
         border-right: none
   .notice
+    height: fit-content
     padding: 18px 18px 0 18px
     .title
       font-size: 14px
@@ -296,6 +296,7 @@ export default {
         font-weight: 200
         color: rgb(7, 17, 27)
   .photo
+    height: fit-content
     padding: 18px
     .title
       font-size: 14px
@@ -321,6 +322,7 @@ export default {
             height: 90px
             border-radius: 3px
   .info
+    height: fit-content
     padding: 18px 18px 0 18px
     .title
       font-size: 14px

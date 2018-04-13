@@ -50,11 +50,11 @@
               <li class="food" v-for="good in cartFoodList"  v-if="good" :key="good.good.GoodsCode">
                 <div v-show="good">
                   <span class="name">{{ good.good.GoodsTitle }}</span>
-                  <div class="price">
-                    <span>￥{{ good.good.XPrice * good.num }}</span>
-                  </div>
                   <div class="control">
                     <cart-control :food="good.good" :shopid="shopid"></cart-control>
+                  </div>
+                  <div class="price">
+                    <span>￥{{ good.good.XPrice * good.num }}</span>
                   </div>
                 </div>
               </li>
@@ -232,7 +232,6 @@ export default {
       this.listShow = false
     },
     initCategoryNum () {
-      alert('initCategoryNum')
       let newcartFoodList = []
       if (this.shopCart) {
         Object.values(this.shopCart).forEach(category => {
@@ -430,6 +429,7 @@ export default {
     }
     // 购物车列表
     .shopcart-list {
+      height: fit-content;
       position: absolute;
       top: 0;
       left: 0;
@@ -460,13 +460,15 @@ export default {
         }
       }
       .list-content {
-        max-height: 217px;
+        max-height: 220px;
         padding: 0 18px;
+        height: fit-content;
         background-color: #fff;
         overflow: hidden;
         .food {
           position: relative;
           padding: 12px 0;
+          height: 55px;
           box-sizing: border-box;
           border-bottom: 1px solid rgba(7, 17, 27, 0.1);
           .name {
@@ -475,18 +477,21 @@ export default {
             color: rgb(7, 17, 27);
           }
           .price {
-            position: absolute;
-            right: 95px;
-            bottom: 12px;
+            /*<!--position: absolute;-->*/
+            /*<!--right: 95px;-->*/
+            /*<!--bottom: -13px;-->*/
+            float: right;
+            margin-right: 15px;
             line-height: 24px;
             font-size: 14px;
             font-weight: 700;
             color: rgb(240, 20, 20);
           }
           .control {
-            position: absolute;
+           /* position: absolute;
             right: 0;
-            bottom: -5px;
+            bottom: -8px;*/
+            float: right;
           }
         }
       }

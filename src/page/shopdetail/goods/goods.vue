@@ -231,6 +231,7 @@ export default {
     background-color: #fff;
     overflow: hidden;
     .menu-wrapper {
+      height: fit-content;
       flex: 0 0 80px;
       width: 80px;
       background-color: #f3f5f7;
@@ -308,6 +309,7 @@ export default {
             }
           }
           .content-m {
+            height: fit-content;
             flex: 1;
             .name {
               font-size: 14px;

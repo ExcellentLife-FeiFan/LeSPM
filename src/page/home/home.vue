@@ -4,7 +4,7 @@
     <div class="refresh-content">
       <!--首页轮播图-->
       <div class="banner">
-        <mt-swipe :auto="3000">
+        <mt-swipe :auto="3000" class="mt-swipe">
           <mt-swipe-item v-for="item in bannerData" :key="item.id">
             <img :src="item.src"/>
           </mt-swipe-item>
@@ -101,9 +101,7 @@ export default {
   /*@import '~@/assets/scss/const.scss';*/
   /*@import '~@/assets/scss/mixin.scss';*/
   .home {
-    height: 100%;
     .refresh-content{
-      height: 100%;
       .banner {
         height: 170px;
         text-align: center;
@@ -113,6 +111,8 @@ export default {
           width: 100%;
           height: 100%;
         }
+      }
+      .near-shops{
       }
     }
     .mint-loadmore-top{

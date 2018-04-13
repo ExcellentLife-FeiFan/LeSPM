@@ -43,6 +43,7 @@ export default {
     let category = shop[categoryid] = (shop[categoryid] || {})
     if (category[goodid]) {
       category[goodid]['num']--
+      state.cartList = {...cart}
       // 存入localStorage
       setStore('buyCart', state.cartList)
     } else {

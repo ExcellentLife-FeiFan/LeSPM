@@ -70,6 +70,7 @@ export default {
     flex-direction: row;
     padding: 10px 0;
     overflow: hidden;
+    height: fit-content;
     @include onepx('bottom')
     &:last-child {
       &:after {

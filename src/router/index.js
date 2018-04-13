@@ -47,11 +47,11 @@ export default new Router({
         }]
     },
     {
-      name: 'shopdetail',
       path: '/shopdetail/:shopid',
       component: shopdetail,
       children: [
         {
+          name: 'shopdetail',
           path: 'goods',
           component: goods
         },

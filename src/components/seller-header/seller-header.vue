@@ -283,6 +283,7 @@ export default {
     backdrop-filter: blur(10px);
     .detail-wrapper {
       min-height: 100%;
+      height: fit-content;
       .detail-main {
         padding-top: 64px;
         padding-bottom: 64px;

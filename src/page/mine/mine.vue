@@ -25,6 +25,10 @@ export default {
   /*@import '~@/assets/scss/const.scss';*/
   /*@import '~@/assets/scss/mixin.scss';*/
   .mine{
+    background-color: red;
+    margin:0;
+    padding:0;
+    width: 100%;
   }
 
   .loading-enter-active, .loading-leave-active {
