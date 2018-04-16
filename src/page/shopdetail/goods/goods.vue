@@ -43,10 +43,10 @@
                   <div class="price">
                     <span class="now">￥{{ good.XPrice }}</span>
                     <span class="old" v-show="good.YPrice">￥{{ good.YPrice }}</span>
-                  </div>
 
-                  <div class="control">
-                    <cart-control :food="good" :shopid="seller.SupermarketCode" @drop="drop"></cart-control>
+                    <div class="control fr">
+                      <cart-control :food="good" :shopid="seller.SupermarketCode" @drop="drop"></cart-control>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -295,7 +295,7 @@ export default {
         .foods-item {
           position: relative;
           display: flex;
-          margin: 18px;
+          margin: 14px 6px 14px 14px;
           padding-bottom: 18px;
           @include onepx('bottom', true);
           .icon {
@@ -350,12 +350,11 @@ export default {
                 color: rgb(147, 153, 159);
                 text-decoration: line-through;
               }
+              .control {
+                height: 24px;
+              }
             }
-            .control {
-              position: absolute;
-              right: 0;
-              bottom: 1px;
-            }
+
           }
         }
       }

@@ -265,6 +265,7 @@ export default {
   .title-content {
     position: relative;
     padding: 18px;
+    height: fit-content;
     .name {
       line-height: 14px;
       margin-bottom: 8px;
@@ -305,8 +306,10 @@ export default {
     }
     .control {
       position: absolute;
-      right: 12px;
-      bottom: 12px;
+      right: 18px;
+      bottom: 28px;
+      height: 24px;
+      line-height: 24px;
     }
     .buy {
       position: absolute;

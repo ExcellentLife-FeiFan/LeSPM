@@ -105,13 +105,6 @@ export default {
     }
   },
   props: {
-    // // 加入购物车的商品
-    // selectFoods: {
-    //   type: Array,
-    //   default () {
-    //     return []
-    //   }
-    // },
     // 配送费
     deliveryPrice: {
       type: [String, Number],
@@ -412,6 +405,7 @@ export default {
     // 飞行小球
     .ball-content {
       .ball {
+        height: fit-content;
         position: fixed;
         left: 32px;
         bottom: 22px;
@@ -423,7 +417,7 @@ export default {
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background-color: #FFD161;
+        background-color: #15aed1;
         transition: all 0.4s linear;
       }
     }

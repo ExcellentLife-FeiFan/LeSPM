@@ -101,6 +101,7 @@ export default {
 .cart-control {
   font-size: 0;
   line-height: 24px;
+  height: 24px;
   .decrease, .add {
     display: inline-block;
     padding: 4px;
