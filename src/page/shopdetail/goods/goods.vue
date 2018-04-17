@@ -139,7 +139,7 @@ export default {
       // console.log(this.listHeight)
     },
     getGoods () {
-      this.$axios.get('/api/API_User/GetGoodsBySupermarket', {params: {SupermarketCode: this.seller.SupermarketCode}}).then((res) => {
+      this.$axios.get('/API_User/GetGoodsBySupermarket', {params: {SupermarketCode: this.seller.SupermarketCode}}).then((res) => {
         console.log(res)
         this.goods = res.data.Obj
         // DOM 渲染完成才能进行计算

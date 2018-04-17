@@ -1,3 +1,3 @@
 /* eslint-disable no-unused-vars */
-let baseApiUrl = 'http://api.zooheng.com:8889'
-let baseImageUrl = 'http://api.zooheng.com:8888'
+export const baseApiUrl = 'http://api.zooheng.com:8889'
+export const baseImageUrl = 'http://api.zooheng.com:8888'

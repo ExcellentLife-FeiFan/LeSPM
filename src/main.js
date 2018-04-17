@@ -1,4 +1,5 @@
-/* eslint-disable no-new,import/first,import/no-duplicates */
+/* eslint-disable no-new,import/first,import/no-duplicates,no-unused-vars */
+import * as Con from './config/constants.js'
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -23,7 +24,13 @@ import '@/assets/scss/material-icons.css'
 
 /* axios导入 */
 import axios from 'axios'
-Vue.prototype.$axios = axios
+const API_PROXY = 'https://bird.ioliu.cn/v1/?url='
+var axiosI = axios.create({
+  baseURL: API_PROXY + Con.baseApiUrl,
+  // baseURL: '/api',
+  timeout: 5000
+})
+Vue.prototype.$axios = axiosI
 Vue.config.productionTip = false
 
 /* Mint UI导入 */

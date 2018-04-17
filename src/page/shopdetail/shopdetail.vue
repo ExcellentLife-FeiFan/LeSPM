@@ -59,7 +59,7 @@ export default {
       this.getShopById()
     },
     getShopById () {
-      this.$axios.get('/api/API_User/GetSupermarketInfo', {params: {SupermarketCode: this.shopid}}).then((res) => {
+      this.$axios.get('/API_User/GetSupermarketInfo', {params: {SupermarketCode: this.shopid}}).then((res) => {
         console.log(res)
         this.showLoading = false
         this.seller = res.data.Obj // Object.assign({}, this.seller, res.data.Obj)
