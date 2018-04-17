@@ -68,7 +68,8 @@ export default {
     },
     ...mapMutations(['SAVE_ADDRESS']),
     getNearList () {
-      this.$axios.get('/api/API_User/GetSupermarkeyList', {params: {CityName: '北京'}}).then((res) => {
+      // this.$axios.get('/api/API_User/GetSupermarkeyList', {params: {CityName: '北京'}}).then((res) => {
+      this.$axios.get('http://api.zooheng.com:8889/API_User/GetSupermarkeyList', {params: {CityName: '北京'}}).then((res) => {
         console.log(res)
         this.showLoading = false
         this.shoplist = res.data.Obj
