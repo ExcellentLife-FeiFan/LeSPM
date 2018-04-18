@@ -76,7 +76,7 @@
       <div class="info">
         <h1 class="title">商家信息</h1>
         <ul>
-          <!--<li v-for="item in seller.infos" class="item" :key="item.id">{{item}}</li>-->
+          <li v-for="item in seller.infos" class="item" :key="item.id">{{item}}</li>
         </ul>
       </div>
   </div>
@@ -170,172 +170,168 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '~@/assets/scss/const.scss';
-@import '~@/assets/scss/mixin.scss';
+  @import '~@/assets/scss/const.scss';
+  @import '~@/assets/scss/mixin.scss';
 
-.seller
-  position: absolute
-  top: 174px
-  bottom: 0
-  left: 0
-  width: 100%
-  background-color: #fff
-  overflow: hidden
-  .overview
-    height: fit-content
-    position: relative
-    padding: 18px
-    .collect
-      border-bottom: 1px solid rgba(7, 17, 27, 0.1)
-      padding-bottom: 18px
-      .name
-        font-size: 16px
-        color: rgb(7, 17, 27)
-        line-height: 14px
-        margin-bottom: 15px
-      .star-wrapper
-        display: inline-block
-        margin-right: 12px
-        .star
+  .seller
+    position: absolute
+    top: 174px
+    bottom: 0
+    left: 0
+    width: 100%
+    background-color: #fff
+    overflow: hidden
+    .overview
+      position: relative
+      padding: 18px
+      .collect
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        padding-bottom: 18px
+        .name
+          font-size: 16px
+          color: rgb(7, 17, 27)
+          line-height: 14px
+          margin-bottom: 15px
+        .star-wrapper
           display: inline-block
-        .ratingCount
+          margin-right: 12px
+          .star
+            display: inline-block
+          .ratingCount
+            display: inline-block
+            font-size: 14px
+            color: rgb(7, 17, 27)
+            line-height: 14px
+        .sellCount
           display: inline-block
           font-size: 14px
           color: rgb(7, 17, 27)
           line-height: 14px
-      .sellCount
-        display: inline-block
+        .collect-icon
+          display: inline-block
+          position: absolute
+          top: 18px
+          right: 18px
+          text-align: center
+          .icon-favorite
+            display: inline-block
+            color: #d4d6d9
+            font-size: 24px
+            margin-left: 5px
+            margin-bottom: 8px
+            &.active
+              color: rgb(240, 20, 20)
+          .text
+            font-size: 10px
+            line-height: 10px
+            color: rgb(77, 85, 93)
+      .param
+        padding-top: 18px
+        display: flex
+        .left, .mid, .right
+          display: inline-block
+          flex: 1
+          text-align: center
+          border-right: 1px solid rgba(7, 17, 27, 0.1)
+          .text
+            display: block
+            margin-top: 18px
+            margin-bottom: 4px
+            color: rgb(147, 153, 159)
+            font-size: 10px
+            line-height: 10px
+          .price
+            font-size: 10px
+            color: rgb(7, 17, 27)
+            font-weight: 200
+            line-height: 24px
+            margin-bottom: 18px
+            .num
+              font-size: 24px
+        .right
+          border-right: none;
+    .notice
+      padding: 18px 18px 0 18px
+      .title
         font-size: 14px
         color: rgb(7, 17, 27)
+        margin-bottom: 12px
         line-height: 14px
-      .collect-icon
-        display: inline-block
-        position: absolute
-        top: 18px
-        right: 18px
-        text-align: center
-        .icon-favorite
-          display: inline-block
-          color: #d4d6d9
-          font-size: 24px
-          margin-left: 5px
-          margin-bottom: 8px
-          &.active
-            color: rgb(240, 20, 20)
-        .text
-          font-size: 10px
-          line-height: 10px
-          color: rgb(77, 85, 93)
-    .param
-      padding-top: 18px
-      display: flex
-      .left, .mid, .right
-        display: inline-block
-        flex: 1
-        text-align: center
-        border-right: 1px solid rgba(7, 17, 27, 0.1)
-        .text
-          display: block
-          margin-top: 18px
-          margin-bottom: 4px
-          color: rgb(147, 153, 159)
-          font-size: 10px
-          line-height: 10px
-        .price
-          font-size: 10px
-          color: rgb(7, 17, 27)
+      .text
+        padding: 8px 0 0 12px
+        font-size: 12px
+        line-height: 24px
+        font-weight: 200
+        color: rgb(240, 20, 20)
+        padding-bottom: 16px
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+      .support
+        padding: 16px 12px
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        &:last-child
+          border: none
+        .icon
+          display: inline-block;
+          width: 18px
+          height: 18px
+          margin-right: 4px
+          background-size: 18px 18px
+          background-repeat: no-repeat
+          vertical-align: top
+          &.decrease
+            background-image: url('./img/decrease_1@2x.png')
+          &.discount
+            background-image: url('./img/discount_1@2x.png')
+          &.guarantee
+            background-image: url('./img/guarantee_1@2x.png')
+          &.invoice
+            background-image: url('./img/invoice_1@2x.png')
+          &.special
+            background-image: url('./img/special_1@2x.png')
+        .description
+          font-size: 12px
+          line-height: 16px
           font-weight: 200
-          line-height: 24px
-          margin-bottom: 18px
-          .num
-            font-size: 24px
-      .right
-        border-right: none
-  .notice
-    height: fit-content
-    padding: 18px 18px 0 18px
-    .title
-      font-size: 14px
-      color: rgb(7, 17, 27)
-      margin-bottom: 12px
-      line-height: 14px
-    .text
-      padding: 8px 0 0 12px
-      font-size: 12px
-      line-height: 24px
-      font-weight: 200
-      color: rgb(240, 20, 20)
-      padding-bottom: 16px
-      border-bottom: 1px solid rgba(7, 17, 27, 0.1)
-    .support
-      padding: 16px 12px
-      border-bottom: 1px solid rgba(7, 17, 27, 0.1)
-      &:last-child
-        border: none
-      .icon
-        display: inline-block
-        width: 18px
-        height: 18px
-        margin-right: 4px
-        background-size: 18px 18px
-        background-repeat: no-repeat
-        vertical-align: top
-        &.decrease
-          background-image: url('./img/decrease_1@2x.png')
-        &.discount
-          background-image: url('./img/discount_1@2x.png')
-        &.guarantee
-          background-image: url('./img/guarantee_1@2x.png')
-        &.invoice
-          background-image: url('./img/invoice_1@2x.png')
-        &.special
-          background-image: url('./img/special_1@2x.png')
-      .description
+          color: rgb(7, 17, 27)
+    .photo
+      padding: 18px
+      .title
+        font-size: 14px
+        color: rgb(7, 17, 27)
+        margin-bottom: 12px
+        line-height: 14px
+      .pic-wrapper
+        width: 100%
+        overflow: hidden
+        // 图片不换行
+        white-space: nowrap
+        .pic-list
+          font-size: 0
+          .pic-item
+            display: inline-block
+            margin-right: 6px
+            width: 120px
+            height: 90px
+            &:last:child
+              margin-right: 0
+            img
+              width: 120px
+              height: 90px
+              border-radius: 3px
+    .info
+      padding: 18px 18px 0 18px
+      .title
+        font-size: 14px
+        color: rgb(7, 17, 27)
+        margin-bottom: 12px
+        line-height: 14px
+      .item
         font-size: 12px
         line-height: 16px
         font-weight: 200
         color: rgb(7, 17, 27)
-  .photo
-    height: fit-content
-    padding: 18px
-    .title
-      font-size: 14px
-      color: rgb(7, 17, 27)
-      margin-bottom: 12px
-      line-height: 14px
-    .pic-wrapper
-      width: 100%
-      overflow: hidden
-      // 图片不换行
-      white-space: nowrap
-      .pic-list
-        font-size: 0
-        .pic-item
-          display: inline-block
-          margin-right: 6px
-          width: 120px
-          height: 90px
-          &:last:child
-            margin-right: 0
-          img
-            width: 120px
-            height: 90px
-            border-radius: 3px
-  .info
-    height: fit-content
-    padding: 18px 18px 0 18px
-    .title
-      font-size: 14px
-      color: rgb(7, 17, 27)
-      margin-bottom: 12px
-      line-height: 14px
-    .item
-      font-size: 12px
-      line-height: 16px
-      font-weight: 200
-      color: rgb(7, 17, 27)
-      padding: 16px 12px
-      border-bottom: 1px solid rgba(7, 17, 27, 0.1)
-      &:last-child
-        border-bottom: 0px solid rgba(7, 17, 27, 0.1)
+        padding: 16px 12px
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        &:last-child
+          border-bottom: 0px solid rgba(7, 17, 27, 0.1)
 </style>
