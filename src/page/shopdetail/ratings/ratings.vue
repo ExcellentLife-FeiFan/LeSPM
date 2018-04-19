@@ -79,7 +79,6 @@
 import CrossLine from '@/components/cross-line/cross-line'
 import RatingsSelect from '@/components/ratings-select/ratings-select'
 import moment from 'moment'
-import axios from 'axios'
 import BScroll from 'better-scroll'
 import StarRating from 'vue-star-rating'
 
@@ -116,7 +115,13 @@ export default {
   methods: {
     // 初始化数据
     _initData () {
-      axios.get('/api/ratings').then(res => {
+      // 初始化 better-scroll
+      this.$nextTick(() => {
+        this.scroll = new BScroll(this.$refs.ratingsRef, {
+          click: true
+        })
+      })
+      /*   axios.get('/api/ratings').then(res => {
         if (res.data.code === 0) {
           this.ratings = res.data.data
         }
@@ -128,7 +133,7 @@ export default {
         })
       }).catch(err => {
         console.log(err)
-      })
+      }) */
     },
     // 组件间通讯 ratings-select
     select (type) {

@@ -89,7 +89,7 @@ export default {
 
   .shop-detail {
     .main-content{
-      height: fit-content;
+      /*height: fit-content;*/
       .tab {
         display: flex;
         flex-direction: row;

@@ -1,7 +1,8 @@
 <!-- 商家模块 商家页面 -->
 
 <template>
-  <div class="seller" ref="sellerRef">
+  <div class="seller" ref="sellerRefs">
+    <div class="scroll-content">
       <!-- 概览 -->
       <div class="overview">
         <div class="collect">
@@ -63,9 +64,9 @@
 
         <div class="pic-wrapper" ref="picRef">
           <ul class="pic-list" ref="picListRef">
-            <!--<li class="pic-item" v-for="pic in seller.pics" :key="pic">-->
-              <!--<img :src="pic">-->
-            <!--</li>-->
+            <li class="pic-item" v-for="pic in seller.pics" :key="pic">
+              <img :src="pic">
+            </li>
           </ul>
         </div>
       </div>
@@ -79,6 +80,7 @@
           <li v-for="item in seller.infos" class="item" :key="item.id">{{item}}</li>
         </ul>
       </div>
+    </div>
   </div>
 </template>
 
@@ -117,7 +119,7 @@ export default {
     // 初始化页面滚动
     _initScroll () {
       if (!this.scroll) {
-        this.scroll = new BScroll(this.$refs.sellerRef, {
+        this.scroll = new BScroll(this.$refs.sellerRefs, {
           click: true
         })
       } else {
@@ -174,6 +176,7 @@ export default {
   @import '~@/assets/scss/mixin.scss';
 
   .seller
+    height: fit-content
     position: absolute
     top: 174px
     bottom: 0
