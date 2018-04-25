@@ -40,7 +40,7 @@ export default {
   background: #fff;
   border-bottom: 1px solid #E4E4E4;
   margin: 0 15px;
-  padding: 0 10px;
+  padding: 0 5px;
   .ico {
     display: inline-block;
     width: 30px;

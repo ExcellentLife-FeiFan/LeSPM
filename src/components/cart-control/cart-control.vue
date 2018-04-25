@@ -107,7 +107,7 @@ export default {
     padding: 4px;
     i {
       font-size: 24px;
-      color: #15aed1;
+      color: $primary-color;
       display: inline-block;
     }
   }

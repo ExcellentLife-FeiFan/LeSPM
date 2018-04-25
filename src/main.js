@@ -15,11 +15,10 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 // import colors from 'vuetify/es5/util/colors'
 Vue.use(Vuetify)
-
 /* 全局样式导入 */
 import '@/assets/scss/reset.scss'
 import '@/assets/scss/iconfont.scss'
-import '@/assets/ali-fonts/iconfont.css'
+import '@/assets/ali-fonts/font_igfoz1eun4p9zfr/iconfont.css'
 import '@/assets/scss/material-icons.css'
 
 /* axios导入 */

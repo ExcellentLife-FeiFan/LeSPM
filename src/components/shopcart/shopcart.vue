@@ -54,7 +54,7 @@
                     <cart-control :food="good.good" :shopid="shopid"></cart-control>
                   </div>
                   <div class="price">
-                    <span>￥{{ good.good.XPrice * good.num }}</span>
+                    <span>￥{{(good.good.XPrice * good.num).toFixed(2) }}</span>
                   </div>
                 </div>
               </li>
@@ -255,7 +255,7 @@ export default {
           total += parseFloat(good.good.XPrice) * good.num
         }
       })
-      return total
+      return total.toFixed(2)
     },
     // 所选商品总数量
     totalCount () {

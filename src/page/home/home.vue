@@ -101,6 +101,7 @@ export default {
   /*@import '~@/assets/scss/const.scss';*/
   /*@import '~@/assets/scss/mixin.scss';*/
   .home {
+    height: 100%;
     .refresh-content{
       .banner {
         height: 170px;
