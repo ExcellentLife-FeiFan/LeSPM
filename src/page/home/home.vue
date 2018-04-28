@@ -1,27 +1,29 @@
 <template>
   <div class="home">
+    <action-bar title="北京市后现代城" rightTxt="用户名" leftRes="iconfont icon-wxbsousuotuiguang" @titleClick="titleClick" @leftImgClick="leftImgClick" @rightTxtClick="rightTxtClick">
+    </action-bar>
     <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
-    <div class="refresh-content">
-      <!--首页轮播图-->
-      <div class="banner">
-        <mt-swipe :auto="3000" class="mt-swipe">
-          <mt-swipe-item v-for="item in bannerData" :key="item.id">
-            <img :src="item.src"/>
-          </mt-swipe-item>
-        </mt-swipe>
-      </div>
-      <v-space></v-space>
+      <div class="refresh-content">
+        <!--首页轮播图-->
+        <div class="banner">
+          <mt-swipe :auto="3000" class="mt-swipe">
+            <mt-swipe-item v-for="item in bannerData" :key="item.id">
+              <img :src="item.src"/>
+            </mt-swipe-item>
+          </mt-swipe>
+        </div>
+        <v-space></v-space>
 
-      <div class="near-shops">
-        <title-bar txt="附近商家"></title-bar>
-        <shop-item v-for="item in shoplist"
-                   :key="item.SupermarketCode"
-                   :data="item"></shop-item>
+        <div class="near-shops">
+          <title-bar txt="附近商家"></title-bar>
+          <shop-item v-for="item in shoplist"
+                     :key="item.SupermarketCode"
+                     :data="item"></shop-item>
+        </div>
+        <transition name="loading">
+          <loading v-show="showLoading"></loading>
+        </transition>
       </div>
-      <transition name="loading">
-        <loading v-show="showLoading"></loading>
-      </transition>
-    </div>
       <div slot="top" class="mint-loadmore-top">
         <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
         <span v-show="topStatus === 'loading'">
@@ -39,10 +41,11 @@ import VSpace from '@/components/v-space.vue'
 import ShopItem from '@/components/shop-item.vue'
 import TitleBar from '@/components/title-bar.vue'
 import Loading from '@/components/loading.vue'
+import ActionBar from '@/components/action-bar.vue'
 
 export default {
   components: {
-    VSpace, ShopItem, TitleBar, Loading
+    VSpace, ShopItem, TitleBar, Loading, ActionBar
   },
   data () {
     return {
@@ -89,6 +92,15 @@ export default {
       if (this.topStatus === 'loading') {
         this.$refs.loadmore.onTopLoaded()
       }
+    },
+    titleClick () {
+      alert('titleClick')
+    },
+    leftImgClick () {
+      alert('leftImgClick')
+    },
+    rightTxtClick () {
+      alert('rightTxtClick')
     }
   },
   mounted () {

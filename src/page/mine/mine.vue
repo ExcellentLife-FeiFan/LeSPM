@@ -153,6 +153,9 @@ export default {
       width: 100%;
       background-color: #fff;
       .cross-item {
+        i{
+          color: $primary-color;
+        }
         &:last-child {
           border-bottom: none;
         }
@@ -162,6 +165,9 @@ export default {
       width: 100%;
       background-color: #fff;
       .cross-item {
+        i{
+          color: $primary-color;
+        }
         &:last-child {
           border-bottom: none;
         }
