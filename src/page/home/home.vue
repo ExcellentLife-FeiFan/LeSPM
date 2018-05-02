@@ -2,7 +2,7 @@
   <div class="home">
     <action-bar title="北京市后现代城" rightTxt="用户名" leftRes="iconfont icon-wxbsousuotuiguang" @titleClick="titleClick" @leftImgClick="leftImgClick" @rightTxtClick="rightTxtClick">
     </action-bar>
-    <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
+    <mt-loadmore class="main-content" :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
       <div class="refresh-content">
         <!--首页轮播图-->
         <div class="banner">
@@ -113,28 +113,33 @@ export default {
   /*@import '~@/assets/scss/const.scss';*/
   /*@import '~@/assets/scss/mixin.scss';*/
   .home {
-    height: 100%;
-    .refresh-content{
-      .banner {
-        height: 170px;
-        text-align: center;
-        overflow: hidden;
-        font-size: 30px;
-        img {
-          width: 100%;
-          height: 100%;
+    .main-content{
+      margin-top: 48px;
+      margin-bottom: 70px;
+      .refresh-content{
+        height: fit-content;
+        .banner {
+          height: 170px;
+          text-align: center;
+          overflow: hidden;
+          font-size: 30px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .near-shops{
         }
       }
-      .near-shops{
+      .mint-loadmore-top{
+        span {
+          display: inline-block;
+          transition: .2s linear;
+          vertical-align: middle;
+        }
       }
     }
-    .mint-loadmore-top{
-      span {
-        display: inline-block;
-        transition: .2s linear;
-        vertical-align: middle;
-      }
-    }
+
   }
   .loading-enter-active, .loading-leave-active {
     transition: opacity 1s

@@ -1,37 +1,54 @@
+<!-- 发现 -->
+
 <template>
   <div class="find">
-    find
+    <div v-for="item in findListData" :key="item.id">
+      <find-item :data="item"></find-item>
+    </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable no-unused-vars */
+import FindItem from '@/page/find/find-item.vue'
 
 export default {
+  components: {
+    FindItem
+  },
   data () {
     return {
+      findListData: [{id: 1}, {id: 2}, {id: 3}, {id: 4}]
     }
   },
-  components: {
-  },
+  props: {},
+  watch: {},
   methods: {
+    _initFindListData () {
+      // axios.get('/api/findList').then(res => {
+      //   if (res.data.code === 0) {
+      //     this.findListData = res.data.data.data
+      //   }
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+    }
   },
-  computed: {
-  }
+  filters: {},
+  computed: {},
+  created () {
+    this._initFindListData()
+  },
+  mounted () {},
+  destroyed () {}
 }
 </script>
 
 <style lang="scss" scoped>
-  /*@import '~@/assets/scss/const.scss';*/
-  /*@import '~@/assets/scss/mixin.scss';*/
-  .find{
-  }
+  @import '~@/assets/scss/const.scss';
+  @import '~@/assets/scss/mixin.scss';
 
-  .loading-enter-active, .loading-leave-active {
-    transition: opacity 1s
-  }
-
-  .loading-enter, .loading-leave-active {
-    opacity: 0
+  .find {
+    background-color: #ebebeb;
+    margin-bottom: 50px;
   }
 </style>

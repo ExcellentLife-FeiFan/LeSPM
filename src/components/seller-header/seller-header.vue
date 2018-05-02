@@ -81,7 +81,7 @@
         </div>
 
         <div class="detail-close" @click="detailShow = false">
-          <i class="icon-close"></i>
+          <i class="iconfont icon-close"></i>
         </div>
       </div>
     </transition>

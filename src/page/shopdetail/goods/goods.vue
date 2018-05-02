@@ -41,12 +41,11 @@
                   </div>
 
                   <div class="price">
-                    <span class="now">￥{{ good.XPrice }}</span>
-                    <span class="old" v-show="good.YPrice">￥{{ good.YPrice }}</span>
-
-                    <div class="control fr">
-                      <cart-control :food="good" :shopid="seller.SupermarketCode" @drop="drop"></cart-control>
-                    </div>
+                    <span class="now fl">￥{{ good.XPrice }}</span>
+                    <span class="old fl" v-show="good.YPrice">￥{{ good.YPrice }}</span>
+                  </div>
+                  <div class="control">
+                    <cart-control class="fr" :food="good" :shopid="seller.SupermarketCode" @drop="drop"></cart-control>
                   </div>
                 </div>
               </li>
@@ -231,13 +230,12 @@ export default {
     background-color: #fff;
     overflow: hidden;
     .menu-wrapper {
-      /*height: fit-content;*/
       flex: 0 0 80px;
-      width: 80px;
+      max-width: 25%;
       background-color: #f3f5f7;
       .menu-item {
         display: table;
-        width: 80px;
+        width: 100%;
         height: 54px;
         line-height: 14px;
         padding: 0 12px;
@@ -281,6 +279,7 @@ export default {
       }
     }
     .foods-wrapper {
+      width: 75%;
       flex: 1;
       .foods-list {
         .menu-title {
@@ -311,12 +310,15 @@ export default {
           .content-m {
             height: fit-content;
             flex: 1;
+            width: 100%;
             .name {
               font-size: 14px;
               margin: 2px 0 8px 0;
               height: 14px;
               line-height: 14px;
               color: rgb(7, 17, 27);
+              /*max-width: 70%;*/
+              @include ellipsis(1);
             }
             .desc {
               margin-bottom: 8px;
@@ -341,18 +343,19 @@ export default {
               line-height: 24px;
               .now {
                 font-weight: 700;
-                margin-right: 2px;
+                margin-right: 4px;
                 font-size: 14px;
                 color: rgb(240, 20, 20);
               }
               .old {
-                font-size: 10px;
+                font-size: 8px;
                 color: rgb(147, 153, 159);
                 text-decoration: line-through;
               }
-              .control {
-                height: 24px;
-              }
+            }
+            .control {
+              clear: both;
+              line-height: 24px;
             }
 
           }

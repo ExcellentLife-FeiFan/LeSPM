@@ -15,7 +15,7 @@
           </div>
 
           <div class="price" :class="{'priceLight':totalCount > 0}">￥{{ totalPrice }}</div>
-          <div class="desc">另需配送费 {{ deliveryPrice }} 元</div>
+          <div class="desc">运费 {{ deliveryPrice }} 元</div>
         </div>
 
         <div class="right" @click.stop="pay">
@@ -469,6 +469,9 @@ export default {
             line-height: 24px;
             font-size: 14px;
             color: rgb(7, 17, 27);
+            max-width: 40%;
+            float: left;
+            @include ellipsis(1);
           }
           .price {
             /*<!--position: absolute;-->*/

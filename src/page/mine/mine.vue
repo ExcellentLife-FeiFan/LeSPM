@@ -52,6 +52,12 @@
       <cross-item name="关于">
         <i class="iconfont icon-prompt"></i>
       </cross-item>
+
+      <cross-item name="下载App">
+        <i class="iconfont icon-download
+
+"></i>
+      </cross-item>
     </div>
   </div>
 </template>

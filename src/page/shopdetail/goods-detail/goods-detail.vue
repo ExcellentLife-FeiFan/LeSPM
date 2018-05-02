@@ -272,6 +272,7 @@ export default {
       font-size: 14px;
       font-weight: 700;
       color: rgb(7, 17, 27);
+      @include ellipsis(1);
     }
     .detail {
       margin-bottom: 18px;
@@ -294,7 +295,7 @@ export default {
       font-weight: 700;
       line-height: 24px;
       .now {
-        margin-right: 8px;
+        margin-right: 2px;
         font-size: 14px;
         color: rgb(240, 20, 20);
       }
